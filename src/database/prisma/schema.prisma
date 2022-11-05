@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String    @id @default(uuid())
+  email String    @unique
+  name  String
+  password String
+  permission Boolean
+  bookings Booking[] @relation("user")
+
+  @@map("users")
+}
+
+model Category {
+  id String @id @default(uuid())
+  type String
+  book Book[] @relation("category")
+
+  @@map("categories")
+}
+
+model Book {
+  id    String    @id @default(uuid())
+  title  String 
+  author String    @unique
+  categoryId String @map("category_id") 
+  category Category @relation("category", fields: [categoryId], references: [id])
+  bookings Booking[] @relation("book")
+
+  @@map("books")
+}
+
+model Booking {
+  id String @id @default(uuid())
+  userId String @map("user_id")
+  user User @relation("user", fields: [userId], references: [id])
+  bookId String @map("book_id")
+  book Book @relation("book", fields: [bookId], references: [id])
+  createdAt DateTime @map("created_at")
+  returnDate DateTime @map("return_date")
+
+  @@map("bookings")
+}
