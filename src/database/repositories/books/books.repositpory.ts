@@ -7,8 +7,8 @@ export default {
     return prisma.book.findUnique({ where: { id } });
   },
 
-  async create(book: Omit<IBook, 'id'>): Promise<IBook> {
-    return prisma.book.create({
+  async create(book: Omit<IBook, 'id'>): Promise<void> {
+    await prisma.book.create({
       data: { ...book },
     });
   },
