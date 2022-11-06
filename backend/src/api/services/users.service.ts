@@ -1,6 +1,6 @@
 import { IUser } from '../../database/repositories/users/IUser';
 import userRepository from '../../database/repositories/users/users.repository';
-import { AppError } from '../../shared/handleError';
+import { AppError } from '../shared/handleError';
 
 export default {
   async create(user: Omit<IUser, 'id'>) {

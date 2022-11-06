@@ -1,6 +1,6 @@
-import { TQueryParamsBooking } from './../../shared/types/TQueryParamsBooking';
+import { TQueryParamsBooking } from '../shared/types/TQueryParamsBooking';
 import { IUser } from './../../database/repositories/users/IUser';
-import { IRequestWithUser } from './../../shared/types/IResponseWithUser';
+import { IRequestWithUser } from '../shared/types/IResponseWithUser';
 import { IBooking } from './../../database/repositories/bookings/IBooking';
 import { Request, Response } from 'express';
 

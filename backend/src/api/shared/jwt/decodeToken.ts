@@ -1,4 +1,4 @@
-import { IUser } from './../../database/repositories/users/IUser';
+import { IUser } from '../../../database/repositories/users/IUser';
 import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 import { config } from 'dotenv';
 config();

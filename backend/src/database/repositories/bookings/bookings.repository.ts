@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Booking, Prisma } from '@prisma/client';
 import { IBooking } from './IBooking';
 import { prisma } from '../../client';
 
@@ -16,7 +16,7 @@ export default {
     return prisma.booking.findMany({ where: { ...where }, select: { ...SELECT_QUERY } });
   },
 
-  async create(booking: Omit<IBooking, 'id' | 'status'>): Promise<IBooking> {
+  async create(booking: Omit<Booking, 'id' | 'status'>): Promise<IBooking> {
     return prisma.booking.create({
       data: { ...booking },
       select: { ...SELECT_QUERY },

@@ -1,7 +1,7 @@
-import { TQueryParams } from '../../shared/types/TQueryParamsBook';
+import { TQueryParams } from '../shared/types/TQueryParamsBook';
 import { IBook } from './../../database/repositories/books/IBook';
 import bookRepository from '../../database/repositories/books/books.repositpory';
-import { AppError } from '../../shared/handleError';
+import { AppError } from '../shared/handleError';
 
 export default {
   async create(book: Omit<IBook, 'id'>): Promise<IBook> {

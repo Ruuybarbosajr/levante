@@ -1,8 +1,8 @@
 import { IUser } from './../../database/repositories/users/IUser';
-import { IRequestWithUser } from './../../shared/types/IResponseWithUser';
+import { IRequestWithUser } from '../shared/types/IResponseWithUser';
 import { NextFunction, Response } from 'express';
-import { AppError } from '../../shared/handleError';
-import decodeToken from '../../shared/jwt/decodeToken';
+import { AppError } from '../shared/handleError';
+import decodeToken from '../shared/jwt/decodeToken';
 
 export default (req: IRequestWithUser, _res: Response, next: NextFunction) => {
   const { authorization } = req.headers;

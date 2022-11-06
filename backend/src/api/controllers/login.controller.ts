@@ -1,4 +1,4 @@
-import { TLogin } from './../../shared/types/TLogin';
+import { TLogin } from '../shared/types/TLogin';
 import { Request, Response } from 'express';
 import service from '../services';
 

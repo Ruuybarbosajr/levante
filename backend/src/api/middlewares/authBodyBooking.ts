@@ -1,8 +1,8 @@
-import { AppError } from './../../shared/handleError/index';
+import { AppError } from '../shared/handleError/index';
 import { IBooking } from './../../database/repositories/bookings/IBooking';
 import { NextFunction, Request, Response } from 'express';
-import schemas from '../../shared/schemas';
-import { bodyAuthentication } from '../../shared/bodyAuthentication';
+import schemas from '../shared/schemas';
+import { bodyAuthentication } from '../shared/bodyAuthentication';
 
 export default (req: Request, _res: Response, next: NextFunction) => {
   const { book, createdAt, returnDate, user } = req.body as IBooking;

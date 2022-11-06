@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { IAppError } from '../../shared/handleError/IAppError';
-import { AppError } from '../../shared/handleError';
+import { IAppError } from '../shared/handleError/IAppError';
+import { AppError } from '../shared/handleError';
 
 export default (
   error: Error | IAppError,

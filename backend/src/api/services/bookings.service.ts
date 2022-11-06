@@ -1,5 +1,5 @@
-import { TQueryParamsBooking } from './../../shared/types/TQueryParamsBooking';
-import { AppError } from './../../shared/handleError/index';
+import { TQueryParamsBooking } from '../shared/types/TQueryParamsBooking';
+import { AppError } from '../shared/handleError/index';
 import { IBook } from './../../database/repositories/books/IBook';
 import { IUser } from './../../database/repositories/users/IUser';
 import { IBooking } from './../../database/repositories/bookings/IBooking';
@@ -7,7 +7,7 @@ import { IBooking } from './../../database/repositories/bookings/IBooking';
 import usersService from './users.service';
 import bookingsRepository from '../../database/repositories/bookings/bookings.repository';
 import booksService from './books.service';
-import { handlePeriod } from '../../shared/handlePeriod';
+import { handlePeriod } from '../shared/handlePeriod';
 
 async function verifyUserAndBook(
   booking: Omit<IBooking, 'id'>

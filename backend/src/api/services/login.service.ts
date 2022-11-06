@@ -1,8 +1,8 @@
-import { TLogin } from './../../shared/types/TLogin';
+import { TLogin } from '../shared/types/TLogin';
 import userRepository from '../../database/repositories/users/users.repository';
 
-import { AppError } from '../../shared/handleError';
-import { generateToken } from '../../shared/jwt/generateToken';
+import { AppError } from '../shared/handleError';
+import { generateToken } from '../shared/jwt/generateToken';
 
 export default {
   async execute(data: TLogin) {

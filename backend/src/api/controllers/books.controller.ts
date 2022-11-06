@@ -1,4 +1,4 @@
-import { TQueryParams } from '../../shared/types/TQueryParamsBook';
+import { TQueryParams } from '../shared/types/TQueryParamsBook';
 import { IBook } from './../../database/repositories/books/IBook';
 import { Request, Response } from 'express';
 import services from '../services';
