@@ -8,7 +8,7 @@ export default {
     return bookRepository.create(book);
   },
 
-  async readOne(id: string): Promise<IBook | null> {
+  async readOne(id: string): Promise<IBook> {
     const findBook = await bookRepository.readOne(id);
     if (findBook) return findBook;
     throw new AppError('Book not found', 404);

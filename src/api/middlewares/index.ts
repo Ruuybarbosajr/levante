@@ -4,6 +4,7 @@ import authToken from './authToken';
 import authBodyBook from './authBodyBook';
 import authUser from './authUser';
 import authBodyUser from './authBodyUser';
+import authBodyBooking from './authBodyBooking';
 
 export default {
   authBodyLogin,
@@ -12,4 +13,5 @@ export default {
   authBodyBook,
   authUser,
   authBodyUser,
+  authBodyBooking,
 };
