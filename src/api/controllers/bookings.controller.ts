@@ -1,3 +1,4 @@
+import { TQueryParamsBooking } from './../../shared/types/TQueryParamsBooking';
 import { IUser } from './../../database/repositories/users/IUser';
 import { IRequestWithUser } from './../../shared/types/IResponseWithUser';
 import { IBooking } from './../../database/repositories/bookings/IBooking';
@@ -27,7 +28,11 @@ export default {
   },
 
   async readAll(req: IRequestWithUser, res: Response) {
-    const bookings = await services.bookings.readAll(req.user as Omit<IUser, 'password'>);
+    const { createdAt, returnDate, status, bookId } = req.query as TQueryParamsBooking;
+    const bookings = await services.bookings.readAll(
+      req.user as Omit<IUser, 'password'>,
+      { createdAt, returnDate, status, bookId }
+    );
     return res.status(200).json(bookings);
   },
 

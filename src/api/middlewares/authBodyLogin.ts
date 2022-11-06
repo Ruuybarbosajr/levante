@@ -7,8 +7,8 @@ import { bodyAuthentication } from '../../shared/bodyAuthentication';
 export default (req: Request, _res: Response, next: NextFunction) => {
   const { email, password } = req.body as TLogin;
 
-  if (bodyAuthentication<TLogin>(schemas.login, { email, password }))
-    return next(new AppError('Invalid fields'));
+  const isInvalidBody = bodyAuthentication<TLogin>(schemas.login, { email, password });
+  if (isInvalidBody) return next(new AppError('Invalid fields'));
 
   next();
 };
