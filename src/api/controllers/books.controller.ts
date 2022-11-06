@@ -1,3 +1,4 @@
+import { TQueryParams } from './../../shared/types/TQueryParams';
 import { IBook } from './../../database/repositories/books/IBook';
 import { Request, Response } from 'express';
 import services from '../services';
@@ -15,8 +16,9 @@ export default {
     return res.status(200).json(book);
   },
 
-  async readAll(_req: Request, res: Response) {
-    const books = await services.books.readAll();
+  async readAll(req: Request, res: Response) {
+    const { title, author, categoryId } = req.query as TQueryParams;
+    const books = await services.books.readAll({ title, author, categoryId });
     return res.status(200).json(books);
   },
 

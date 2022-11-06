@@ -1,6 +1,7 @@
 import { IBook } from './IBook';
 
 import { prisma } from '../../client';
+import { Prisma } from '@prisma/client';
 
 export default {
   async readOne(id: string): Promise<IBook | null> {
@@ -13,8 +14,8 @@ export default {
     });
   },
 
-  async readAll(): Promise<IBook[]> {
-    return prisma.book.findMany();
+  async readAll(config: Prisma.BookWhereInput): Promise<IBook[]> {
+    return prisma.book.findMany({ where: { ...config } });
   },
 
   async update(book: IBook): Promise<IBook> {
