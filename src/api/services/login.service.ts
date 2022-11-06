@@ -1,5 +1,5 @@
 import { TLogin } from './../../shared/types/TLogin';
-import userRepository from '../../database/repositories/user/user.repository';
+import userRepository from '../../database/repositories/users/users.repository';
 
 import { AppError } from '../../shared/handleError';
 import { generateToken } from '../../shared/jwt/generateToken';

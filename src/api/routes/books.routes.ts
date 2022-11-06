@@ -8,4 +8,12 @@ router.get('/all', middlewares.authToken, controllers.books.readAll);
 
 router.get('/:id', middlewares.authToken, controllers.books.readOne);
 
+router.post(
+  '/create',
+  middlewares.authToken,
+  middlewares.authBodyBook,
+  middlewares.authUser,
+  controllers.books.create
+);
+
 export default router;

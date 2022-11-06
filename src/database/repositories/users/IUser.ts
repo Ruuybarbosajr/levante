@@ -1,7 +1,5 @@
-export interface IUser {
+import { INewUser } from './INewUser';
+
+export interface IUser extends INewUser {
   id: string;
-  email: string;
-  name: string;
-  password: string;
-  permission: boolean;
 }

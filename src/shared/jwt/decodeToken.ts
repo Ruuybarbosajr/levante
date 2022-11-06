@@ -1,4 +1,5 @@
-import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
+import { IUser } from './../../database/repositories/users/IUser';
+import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 import { config } from 'dotenv';
 config();
 
@@ -10,7 +11,7 @@ export default (token: string): JwtPayload | TError => {
   const secret = process.env.JWT_SECRET as Secret;
   try {
     const decoded = jwt.verify(token, secret);
-    return decoded as JwtPayload;
+    return decoded as Omit<IUser, 'id'>;
   } catch (err) {
     return {
       error: true,
