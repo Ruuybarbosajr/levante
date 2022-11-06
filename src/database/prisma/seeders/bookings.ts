@@ -12,6 +12,7 @@ async function main() {
       createdAt: new Date(),
       returnDate: returnDate,
       userId: 'e64dd530-12fc-4002-92de-f2a27a9ccd8e',
+      status: 'Aberta',
     },
   ];
 

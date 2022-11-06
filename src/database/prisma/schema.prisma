@@ -50,6 +50,7 @@ model Booking {
   book Book @relation("book", fields: [bookId], references: [id])
   createdAt DateTime @map("created_at")
   returnDate DateTime @map("return_date")
+  status String @default("Aberta")
 
   @@map("bookings")
 }
