@@ -3,8 +3,8 @@ import bookRepository from '../../database/repositories/books/books.repositpory'
 import { AppError } from '../../shared/handleError';
 
 export default {
-  async create(book: Omit<IBook, 'id'>): Promise<void> {
-    await bookRepository.create(book);
+  async create(book: Omit<IBook, 'id'>): Promise<IBook> {
+    return bookRepository.create(book);
   },
 
   async readOne(id: string): Promise<IBook | null> {
