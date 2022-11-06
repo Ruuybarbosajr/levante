@@ -11,9 +11,17 @@ router.get('/:id', middlewares.authToken, controllers.books.readOne);
 router.post(
   '/create',
   middlewares.authToken,
-  middlewares.authBodyBook,
   middlewares.authUser,
+  middlewares.authBodyBook,
   controllers.books.create
+);
+
+router.put(
+  '/update',
+  middlewares.authToken,
+  middlewares.authUser,
+  middlewares.authBodyBook,
+  controllers.books.update
 );
 
 export default router;

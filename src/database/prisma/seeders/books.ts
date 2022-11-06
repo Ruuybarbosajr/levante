@@ -1,8 +1,7 @@
 import { prisma } from '../../client';
-import { Book } from '@prisma/client';
 
 async function main() {
-  const books: Book[] = [
+  const books = [
     {
       id: 'a117e1c7-23db-4f2d-912f-6822c2c35d1d',
       title: 'Clean Code: A Handbook of Agile Software Craftsmanship',
