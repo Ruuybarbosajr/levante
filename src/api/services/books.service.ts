@@ -1,3 +1,4 @@
+import { TQueryParams } from './../../shared/types/TQueryParams';
 import { IBook } from './../../database/repositories/books/IBook';
 import bookRepository from '../../database/repositories/books/books.repositpory';
 import { AppError } from '../../shared/handleError';
@@ -13,8 +14,14 @@ export default {
     throw new AppError('Book not found', 404);
   },
 
-  async readAll() {
-    return bookRepository.readAll();
+  async readAll({ title, categoryId, author }: TQueryParams) {
+    return bookRepository.readAll({
+      AND: [
+        { title: { contains: title } },
+        { categoryId: { contains: categoryId } },
+        { author: { contains: author } },
+      ],
+    });
   },
 
   async update(book: IBook) {
