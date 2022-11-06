@@ -6,8 +6,6 @@ const router = Router();
 
 router.get('/all', middlewares.authToken, controllers.books.readAll);
 
-router.get('/:id', middlewares.authToken, controllers.books.readOne);
-
 router.post(
   '/create',
   middlewares.authToken,
@@ -24,4 +22,12 @@ router.put(
   controllers.books.update
 );
 
+router.delete(
+  '/delete/:id',
+  middlewares.authToken,
+  middlewares.authUser,
+  controllers.books.destroy
+);
+
+router.get('/:id', middlewares.authToken, controllers.books.readOne);
 export default router;
