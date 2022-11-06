@@ -6,13 +6,13 @@ export default {
     return prisma.user.findFirst({ where: { email } });
   },
 
-  async create(user: Omit<IUser, 'Id'>): Promise<IUser> {
+  async create(user: Omit<IUser, 'id'>): Promise<IUser> {
     return prisma.user.create({
       data: { ...user },
     });
   },
 
   async readAll(): Promise<IUser[]> {
-    return prisma.user.findMany();
+    return prisma.user.findMany({ where: { permission: false } });
   },
 };

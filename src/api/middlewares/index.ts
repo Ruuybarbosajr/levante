@@ -3,6 +3,7 @@ import handleError from './handleError';
 import authToken from './authToken';
 import authBodyBook from './authBodyBook';
 import authUser from './authUser';
+import authBodyUser from './authBodyUser';
 
 export default {
   authBodyLogin,
@@ -10,4 +11,5 @@ export default {
   authToken,
   authBodyBook,
   authUser,
+  authBodyUser,
 };
