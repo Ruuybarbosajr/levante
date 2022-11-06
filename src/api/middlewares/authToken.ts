@@ -13,7 +13,7 @@ export default (req: IRequestWithUser, _res: Response, next: NextFunction) => {
 
   if (decoded.error) next(new AppError('You do not have authorization', 401));
 
-  req.user = decoded as Omit<IUser, 'id'>;
+  req.user = decoded as Omit<IUser, 'password'>;
 
   next();
 };

@@ -6,7 +6,7 @@ import { generateToken } from '../../shared/jwt/generateToken';
 
 export default {
   async execute(data: TLogin) {
-    const findUser = await userRepository.readOne(data.email);
+    const findUser = await userRepository.readOne({ email: data.email });
 
     if (!findUser) throw new AppError('User not found', 404);
 

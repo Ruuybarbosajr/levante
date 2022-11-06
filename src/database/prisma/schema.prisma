@@ -36,8 +36,8 @@ model Book {
   categoryId String @map("category_id") 
   category Category @relation("category", fields: [categoryId], references: [id])
   bookings Booking[] @relation("book")
-  createAt DateTime @default(now()) @map("created_at")
-  updateAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt
 
   @@map("books")
 }

@@ -4,18 +4,25 @@ import { IUser } from './../../database/repositories/users/IUser';
 import { IBooking } from './../../database/repositories/bookings/IBooking';
 
 import usersService from './users.service';
-import bookingsRepository from '@src/database/repositories/bookings/bookings.repository';
+import bookingsRepository from '../../database/repositories/bookings/bookings.repository';
 import booksService from './books.service';
 
 async function verifyUserAndBook(
   booking: Omit<IBooking, 'id'>
 ): Promise<[Promise<IUser>, Promise<IBook>]> {
+  console.log(booking);
   return [usersService.readOne(booking.user.id), booksService.readOne(booking.book.id)];
 }
 
 export default {
-  async create(booking: IBooking) {
-    await Promise.all(await verifyUserAndBook(booking));
+  async create(newBooking: Omit<IBooking, 'id'>) {
+    await Promise.all(await verifyUserAndBook(newBooking));
+    const booking = {
+      userId: newBooking.user.id,
+      bookId: newBooking.book.id,
+      createdAt: newBooking.createdAt,
+      returnDate: newBooking.returnDate,
+    };
     return bookingsRepository.create(booking);
   },
 
@@ -27,7 +34,7 @@ export default {
 
   async readAll(user: Omit<IUser, 'password'>) {
     if (user.permission) return bookingsRepository.readAll({});
-    return bookingsRepository.readAll({ id: user.id });
+    return bookingsRepository.readAll({ userId: user.id });
   },
 
   async update(id: string) {

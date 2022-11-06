@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Booking, Prisma } from '@prisma/client';
 import { IBooking } from './IBooking';
 import { prisma } from '../../client';
 
@@ -13,10 +13,10 @@ const SELECT_QUERY = {
 
 export default {
   async readAll(where: Prisma.BookingWhereInput): Promise<IBooking[]> {
-    return prisma.booking.findMany({ where, select: { ...SELECT_QUERY } });
+    return prisma.booking.findMany({ where: { ...where }, select: { ...SELECT_QUERY } });
   },
 
-  async create(booking: Omit<IBooking, 'id'>): Promise<IBooking> {
+  async create(booking: Omit<Booking, 'id' | 'status'>): Promise<IBooking> {
     return prisma.booking.create({
       data: { ...booking },
       select: { ...SELECT_QUERY },
@@ -32,8 +32,8 @@ export default {
     });
   },
 
-  async update(id: string): Promise<void> {
-    await prisma.booking.update({
+  async update(id: string): Promise<IBooking> {
+    return prisma.booking.update({
       where: {
         id,
       },
