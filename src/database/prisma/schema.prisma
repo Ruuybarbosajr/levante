@@ -31,11 +31,13 @@ model Category {
 
 model Book {
   id    String    @id @default(uuid())
-  title  String 
+  title  String
   author String    @unique
   categoryId String @map("category_id") 
   category Category @relation("category", fields: [categoryId], references: [id])
   bookings Booking[] @relation("book")
+  createAt DateTime @default(now()) @map("created_at")
+  updateAt DateTime @updatedAt
 
   @@map("books")
 }

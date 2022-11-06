@@ -1,5 +1,4 @@
-export interface IUser {
-  id: string;
+export interface INewUser {
   email: string;
   name: string;
   password: string;
