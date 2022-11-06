@@ -48,9 +48,9 @@ model Booking {
   user User @relation("user", fields: [userId], references: [id])
   bookId String @map("book_id")
   book Book @relation("book", fields: [bookId], references: [id])
-  createdAt DateTime @map("created_at")
+  createdAt DateTime? @map("created_at") @db.Date()
   returnDate DateTime @map("return_date")
-  status String @default("Aberta")
+  status String @default("Aberta") 
 
   @@map("bookings")
 }
