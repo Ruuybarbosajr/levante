@@ -3,13 +3,12 @@ import { FilterBook } from '../../components/FilterBooks';
 import { Header } from '../../components/Header';
 import { TableBooks } from '../../components/TableBooks';
 import BookingsContext from '../../contexts/bookings/BookingsContext';
-import { getAllBookings } from '../../services/booking.service';
 import { getAllBooks } from '../../services/books.service';
 import { getAllCategories } from '../../services/categories.service';
 
 
 export function Home() {
-  const { setBookings } = useContext(BookingsContext);
+  const { updateList } = useContext(BookingsContext);
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState({
@@ -25,8 +24,7 @@ export function Home() {
   }, []);
 
   async function effectAllBooking() {
-    const response = await getAllBookings();
-    setBookings(response);
+    await updateList('');
   }
 
   async function effectAllBooks(filter) {
@@ -59,16 +57,20 @@ export function Home() {
   return (
     <>
       <Header />
-      <section className='container'>
-        <FilterBook books={books} categories={categories} output={setFilter}/>
-        <div className="grid">
-          <button type="button" onClick={ () => handleFilter() } className='outline'>All</button>
-          <button type="button" onClick={ () => handleFilter('filter') } className='outline'>Filter</button>
-        </div>
-      </section>
-      <section className='container'>
-        <TableBooks books={books} />
-      </section>
+      <article>
+        <section className='container'>
+          <FilterBook books={books} categories={categories} output={setFilter}/>
+          <div className="grid">
+            <button type="button" onClick={ () => handleFilter() } className='outline'>All</button>
+            <button type="button" onClick={ () => handleFilter('filter') } className='outline'>Filter</button>
+          </div>
+        </section>
+      </article>
+      <article>
+        <section className='container'>
+          <TableBooks books={books} />
+        </section>
+      </article>
     </>
   );
 }

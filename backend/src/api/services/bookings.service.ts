@@ -35,7 +35,7 @@ export default {
 
   async readAll(
     user: Omit<IUser, 'password'>,
-    { createdAt, returnDate, status, bookId }: TQueryParamsBooking
+    { createdAt, returnDate, status, bookId, title }: TQueryParamsBooking
   ) {
     const periodCreatedAt = handlePeriod(createdAt);
     const periodReturnDate = handlePeriod(returnDate);
@@ -55,6 +55,7 @@ export default {
       },
       { status: { equals: status } },
       { bookId: { equals: bookId } },
+      { book: { title: { contains: title } } },
     ];
 
     if (user.permission)

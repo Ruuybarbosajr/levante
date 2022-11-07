@@ -3,6 +3,10 @@ import React from 'react';
 export function FilterBook({ books, categories, output }) {
   return (
     <form onSubmit={(event) => event.preventDefault()}>
+      <hgroup>
+        <h1>Books</h1>
+        <h2>Find a book</h2>
+      </hgroup>
       <label htmlFor="title">
             Title
         <input

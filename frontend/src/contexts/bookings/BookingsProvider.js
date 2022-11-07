@@ -5,8 +5,8 @@ import BookingsContext from './BookingsContext';
 export function BookingsProvider({ children }) {
   const [bookings, setBookings] = useState([]);
 
-  async function updateList() {
-    const updateList = await getAllBookings();
+  async function updateList(url) {
+    const updateList = await getAllBookings(url);
     setBookings(updateList);
   }
 
