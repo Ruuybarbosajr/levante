@@ -37,8 +37,14 @@ export function Home() {
     setCategories(response);
   }
 
-  async function handleFilter() {
-    await effectAllBooks(filter);
+  async function handleFilter(type = 'all') {
+    if (type === 'all') {
+      await effectAllBooks({
+        title: '',
+        categoryId: '',
+        author: ''
+      });
+    } else await effectAllBooks(filter);
   }
 
   return (
@@ -46,7 +52,10 @@ export function Home() {
       <Header />
       <section className='container'>
         <FilterBook books={books} categories={categories} output={setFilter}/>
-        <button type="button" onClick={ () => handleFilter() } className='outline'>Filter</button>
+        <div className="grid">
+          <button type="button" onClick={ () => handleFilter() } className='outline'>All</button>
+          <button type="button" onClick={ () => handleFilter('filter') } className='outline'>Filter</button>
+        </div>
       </section>
       <section className='container'>
         <Table books={books} />

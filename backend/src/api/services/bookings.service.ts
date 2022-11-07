@@ -11,8 +11,7 @@ import { handlePeriod } from '../shared/handlePeriod';
 
 async function verifyUserAndBook(
   booking: Omit<IBooking, 'id'>
-): Promise<[Promise<IUser>, Promise<IBook>]> {
-  console.log(booking);
+): Promise<[Promise<IUser>, Promise<Omit<IBook, 'categoryId'>>]> {
   return [usersService.readOne(booking.user.id), booksService.readOne(booking.book.id)];
 }
 

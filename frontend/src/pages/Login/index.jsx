@@ -1,13 +1,15 @@
 import { SnackbarProvider, useSnackbar, } from 'notistack';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import style from './index.module.css';
 import { schemaLogin } from '../../schemas/login';
 import { verifyInputs } from '../../helpers/verifyInput';
 import { signIn } from '../../services/login.service';
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../../context/UserContext';
 
 
 function Login() { 
+  const { saveDataUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [login, setLogin] = useState({
     email: '',
@@ -22,6 +24,7 @@ function Login() {
       const { token } = await signIn(login);
       if (token) {
         localStorage.setItem('token', token);
+        saveDataUser(token);
         navigate('/home');
       }
       enqueueSnackbar('invalid credentials');

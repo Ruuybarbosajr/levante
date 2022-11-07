@@ -17,6 +17,6 @@ export default (req: Request, _res: Response, next: NextFunction) => {
     }
   );
 
-  if (isInvalidBody) return next(new AppError('Invalid fields'));
+  if (isInvalidBody) return next(new AppError('Invalid fieldssss'));
   next();
 };

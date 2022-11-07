@@ -10,7 +10,10 @@ export async function getAllBooks(filter) {
     });
     return response.data;
   } catch (error) {
-    const { data } = error.response;
-    return data;
+    if (error.response) {
+      const { data } = error.response;
+      return data;
+    }
+    return error;
   }
 }
