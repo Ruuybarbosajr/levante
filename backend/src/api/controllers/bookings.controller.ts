@@ -28,10 +28,11 @@ export default {
   },
 
   async readAll(req: IRequestWithUser, res: Response) {
-    const { createdAt, returnDate, status, bookId } = req.query as TQueryParamsBooking;
+    const { createdAt, returnDate, status, bookId, title } =
+      req.query as TQueryParamsBooking;
     const bookings = await services.bookings.readAll(
       req.user as Omit<IUser, 'password'>,
-      { createdAt, returnDate, status, bookId }
+      { createdAt, returnDate, status, bookId, title }
     );
     return res.status(200).json(bookings);
   },

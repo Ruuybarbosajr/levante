@@ -6,7 +6,7 @@ export function Header() {
   }
 
   return (
-    <section className='container'>
+    <header className='container'>
       <nav>
         <ul>
           <li><strong>Library</strong></li>
@@ -17,6 +17,6 @@ export function Header() {
           <li><a href="/" role="button" onClick={() => logout() }>Logout</a></li>
         </ul>
       </nav>
-    </section>
+    </header>
   );
 }

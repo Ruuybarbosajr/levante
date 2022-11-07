@@ -17,9 +17,10 @@ export async function createBooking(data) {
   }
 }
 
-export async function getAllBookings() {
+export async function getAllBookings(filter) {
+  const baseUrl = filter ? '/bookings/all?' : '/bookings/all';
   try {
-    const response = await fetch.get('/bookings/all', {
+    const response = await fetch.get(`${baseUrl}${filter}`, {
       headers: {
         authorization: localStorage.getItem('token'),
       },

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import UserContext from './User/UserContext';
+import UserContext from './UserContext';
 import { decodeToken } from 'react-jwt';
 
-export default function UserProvider({ children }) {
+export function UserProvider({ children }) {
   const [user, setUser] = useState({});
 
   useEffect(() => {

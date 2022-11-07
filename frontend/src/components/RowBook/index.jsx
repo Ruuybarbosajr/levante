@@ -29,7 +29,7 @@ export function RowBook({ book }) {
     };
     const response = await createBooking(data);
     if (response?.id) {
-      await updateList();
+      await updateList('');
       return response;
     }
     return response;
