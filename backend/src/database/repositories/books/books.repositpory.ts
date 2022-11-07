@@ -1,27 +1,43 @@
 import { IBook } from './IBook';
 
 import { prisma } from '../../client';
-import { Prisma } from '@prisma/client';
+import { Book, Prisma } from '@prisma/client';
+
+const SELECT_QUERY = {
+  id: true,
+  author: true,
+  title: true,
+  category: true,
+  createdAt: true,
+  updatedAt: true,
+};
 
 export default {
-  async readOne(id: string): Promise<IBook | null> {
-    return prisma.book.findUnique({ where: { id } });
-  },
-
-  async create(book: Omit<IBook, 'id'>): Promise<IBook> {
-    return prisma.book.create({
-      data: { ...book },
+  async readOne(id: string): Promise<Omit<IBook, 'categoryId'> | null> {
+    return prisma.book.findUnique({
+      where: { id },
+      select: { ...SELECT_QUERY },
     });
   },
 
-  async readAll(config: Prisma.BookWhereInput): Promise<IBook[]> {
-    return prisma.book.findMany({ where: { ...config } });
+  async create(book: Omit<IBook, 'category' | 'id'>): Promise<Omit<IBook, 'categoryId'>> {
+    return prisma.book.create({
+      data: { ...book },
+      select: { ...SELECT_QUERY },
+    });
   },
 
-  async update(book: IBook): Promise<IBook> {
+  async readAll(config: Prisma.BookWhereInput): Promise<Omit<IBook, 'categoryId'>[]> {
+    return prisma.book.findMany({ where: { ...config }, select: { ...SELECT_QUERY } });
+  },
+
+  async update(book: Omit<IBook, 'category'>): Promise<Omit<IBook, 'categoryId'>> {
     return prisma.book.update({
+      where: {
+        id: book.id,
+      },
       data: { ...book },
-      where: { id: book.id },
+      select: { ...SELECT_QUERY },
     });
   },
 

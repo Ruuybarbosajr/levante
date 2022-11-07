@@ -4,11 +4,11 @@ import bookRepository from '../../database/repositories/books/books.repositpory'
 import { AppError } from '../shared/handleError';
 
 export default {
-  async create(book: Omit<IBook, 'id'>): Promise<IBook> {
+  async create(book: Omit<IBook, 'category' | 'id'>): Promise<Omit<IBook, 'categoryId'>> {
     return bookRepository.create(book);
   },
 
-  async readOne(id: string): Promise<IBook> {
+  async readOne(id: string): Promise<Omit<IBook, 'categoryId'>> {
     const findBook = await bookRepository.readOne(id);
     if (findBook) return findBook;
     throw new AppError('Book not found', 404);
@@ -24,7 +24,7 @@ export default {
     });
   },
 
-  async update(book: IBook) {
+  async update(book: Omit<IBook, 'category'>) {
     await this.readOne(book.id);
     return bookRepository.update(book);
   },
