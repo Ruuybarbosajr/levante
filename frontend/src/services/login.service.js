@@ -5,7 +5,10 @@ export async function signIn(data) {
     const response = await fetch.post('/login', data);
     return response.data;
   } catch (error) {
-    const { data } = error.response;
-    return data;
+    if (error.response) {
+      const { data } = error.response;
+      return data;
+    }
+    return error;
   }
 }

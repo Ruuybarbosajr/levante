@@ -18,7 +18,6 @@ export default {
 
   async readAll(req: Request, res: Response) {
     const { title, author, categoryId } = req.query as TQueryParams;
-    console.log(title, author, categoryId);
     const books = await services.books.readAll({ title, author, categoryId });
     return res.status(200).json(books);
   },

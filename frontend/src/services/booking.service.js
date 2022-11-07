@@ -1,8 +1,8 @@
 import fetch from './fetch';
 
-export async function getAllCategories() {
+export async function createBooking(data) {
   try {
-    const response = await fetch.get('/categories/all', {
+    const response = await fetch.post('/bookings/create', data, {
       headers: {
         authorization: localStorage.getItem('token'),
       },
