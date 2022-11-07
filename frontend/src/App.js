@@ -6,6 +6,9 @@ import AuthToken from './components/AuthToken';
 import { BookingsProvider } from './contexts/bookings/BookingsProvider';
 import { UserProvider } from './contexts/User/UserProvider';
 import { Bookings } from './pages/Bookings';
+import CreateUser from './pages/CreateUser';
+import AuthAdmin from './components/AuthAdmin';
+import { SharedProvider } from './contexts/SharedContext/SharedProvided';
 
 function App() {
   return (
@@ -26,7 +29,9 @@ function App() {
               <AuthToken>
                 <UserProvider>
                   <BookingsProvider>
-                    <Home />
+                    <SharedProvider>
+                      <Home />
+                    </SharedProvider>
                   </BookingsProvider>
                 </UserProvider>
               </AuthToken>
@@ -36,8 +41,22 @@ function App() {
             path='/bookings'
             element={
               <BookingsProvider>
-                <Bookings />
+                <UserProvider>
+                  <Bookings />
+                </UserProvider>
               </BookingsProvider>
+            }
+          />
+          <Route
+            path='/create/user'
+            element={
+              <AuthAdmin>
+                <AuthToken>
+                  <UserProvider>
+                    <CreateUser />
+                  </UserProvider>
+                </AuthToken>
+              </AuthAdmin>
             }
           />
         </Routes>

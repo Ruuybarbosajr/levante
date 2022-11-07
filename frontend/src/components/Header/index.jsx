@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import UserContext from '../../contexts/User/UserContext';
 
 export function Header() {
+  const { user } = useContext(UserContext);
   function logout() {
     localStorage.removeItem('token');
   }
@@ -14,6 +16,7 @@ export function Header() {
         <ul>
           <li><a href="/home">Books</a></li>
           <li><a href="/bookings">Bookings</a></li>
+          { user.permission && <li><a href="/create/user">Create user</a></li> }
           <li><a href="/" role="button" onClick={() => logout() }>Logout</a></li>
         </ul>
       </nav>

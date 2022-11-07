@@ -66,7 +66,7 @@ function Login() {
   
         </div>
    
-        <button type="submit">Entrar</button>
+        <button type="submit">Sign In</button>
       </form>
     </section>
   );

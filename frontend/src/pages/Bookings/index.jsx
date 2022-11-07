@@ -32,7 +32,6 @@ export function Bookings() {
       if (value) baseUrl += `${key}=${value}&`;
 
     });
-    console.log(baseUrl);
     await updateList(baseUrl);
   }
 

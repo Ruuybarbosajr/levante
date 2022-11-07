@@ -3,11 +3,16 @@ import { FilterBook } from '../../components/FilterBooks';
 import { Header } from '../../components/Header';
 import { TableBooks } from '../../components/TableBooks';
 import BookingsContext from '../../contexts/bookings/BookingsContext';
+import SharedContext from '../../contexts/SharedContext/SharedContext';
+import UserContext from '../../contexts/User/UserContext';
 import { getAllBooks } from '../../services/books.service';
 import { getAllCategories } from '../../services/categories.service';
+import { getUsers } from '../../services/user.service';
 
 
 export function Home() {
+  const { user } = useContext(UserContext);
+  const { setUsers } = useContext(SharedContext);
   const { updateList } = useContext(BookingsContext);
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -21,7 +26,17 @@ export function Home() {
     effectAllCategories();
     effectAllBooks(filter);
     effectAllBooking();
+    console.log(user);
+    if (user.permission) {
+      effectUsers();
+    }
   }, []);
+
+  async function effectUsers() {
+    const response = await getUsers();
+    console.log(response);
+    setUsers(response);
+  }
 
   async function effectAllBooking() {
     await updateList('');

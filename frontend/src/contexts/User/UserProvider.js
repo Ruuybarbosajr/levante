@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import UserContext from './UserContext';
 import { decodeToken } from 'react-jwt';
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
     const token = decodeToken(localStorage.getItem('token'));
     if (token?.id) {
-      console.log(token);
-      setUser(token);
+      return token;
     }
-  }, []);
+    return {};
+  });
 
   function saveDataUser(token) {
     const dataUser = decodeToken(token);

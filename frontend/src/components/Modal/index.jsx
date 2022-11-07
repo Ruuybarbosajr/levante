@@ -6,7 +6,6 @@ export function Modal({ children, setOpen, functionAction }) {
 
   async function handleReq() {
     setLoading(true);
-    console.log(functionAction);
     const response = await functionAction();
     if (response?.id) {
       setLoading(true);

@@ -34,3 +34,24 @@ export async function getAllBookings(filter) {
     return error;
   }
 }
+
+export async function updatedBooking(id) {
+  try {
+    const response = await fetch.patch(
+      `bookings/update/${id}`,
+      {},
+      {
+        headers: {
+          authorization: localStorage.getItem('token'),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      const { data } = error.response;
+      return data;
+    }
+    return error;
+  }
+}
