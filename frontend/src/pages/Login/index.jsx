@@ -5,7 +5,7 @@ import { schemaLogin } from '../../schemas/login';
 import { verifyInputs } from '../../helpers/verifyInput';
 import { signIn } from '../../services/login.service';
 import { useNavigate } from 'react-router-dom';
-import UserContext from '../../context/UserContext';
+import UserContext from '../../contexts/User/UserContext';
 
 
 function Login() { 

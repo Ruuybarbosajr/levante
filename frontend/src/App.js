@@ -2,8 +2,9 @@ import React from 'react';
 import Login from './pages/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/home';
-import UserProvider from './context/UserProvider';
+import UserProvider from './contexts/UserProvider';
 import AuthToken from './components/AuthToken';
+import { BookingsProvider } from './contexts/bookings/BookingsProvider';
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
             element={
               <AuthToken>
                 <UserProvider>
-                  <Home />
+                  <BookingsProvider>
+                    <Home />
+                  </BookingsProvider>
                 </UserProvider>
               </AuthToken>
             }

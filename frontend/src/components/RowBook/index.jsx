@@ -1,10 +1,16 @@
-import React, { useCallback, useContext } from 'react';
-import UserContext from '../../context/UserContext';
+import React, { useCallback, useContext, useMemo } from 'react';
+import BookingsContext from '../../contexts/bookings/BookingsContext';
+import UserContext from '../../contexts/User/UserContext';
 import { createBooking } from '../../services/booking.service';
 import { OpenModal } from '../OpenModal';
 
-export function Row({ book }) {
+export function RowBook({ book }) {
   const { user } = useContext(UserContext);
+  const { bookings, updateList } = useContext(BookingsContext);
+
+  const isBooking = useMemo(() => {
+    return bookings.some((booking) => book.id === booking.book.id);
+  }, [bookings]);
 
   const  makeDate = useCallback(() => {
     const now = new Date();
@@ -21,7 +27,12 @@ export function Row({ book }) {
       createdAt: makeDate().bookingDate,
       returnDate: makeDate().returnDate
     };
-    return createBooking(data);
+    const response = await createBooking(data);
+    if (response?.id) {
+      await updateList();
+      return response;
+    }
+    return response;
   }
 
   return (
@@ -30,7 +41,7 @@ export function Row({ book }) {
         <td>{book.title}</td>
         <td>{book.author}</td>
         <td>{book.category.type}</td>
-        <td>{
+        { !isBooking && <td> 
           <OpenModal title="Create booking" functionAction={confirmBooking}>
             <section className='container'>
               <header>
@@ -71,8 +82,11 @@ export function Row({ book }) {
               </fieldset>
             </section>
           </OpenModal>
-        }
         </td>
+        }
+        {
+          isBooking && <td><a href="#" role="button" className='outline contrast' disabled>Reserved</a></td>
+        }
       </tr>
     </>
   );
