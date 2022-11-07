@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FilterBook } from '../../components/FilterBooks';
 import { Header } from '../../components/Header';
-import { Table } from '../../components/Table';
+import { TableBooks } from '../../components/TableBooks';
+import BookingsContext from '../../contexts/bookings/BookingsContext';
+import { getAllBookings } from '../../services/booking.service';
 import { getAllBooks } from '../../services/books.service';
 import { getAllCategories } from '../../services/categories.service';
 
 
 export function Home() {
+  const { setBookings } = useContext(BookingsContext);
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState({
@@ -18,7 +21,13 @@ export function Home() {
   useEffect(() => {
     effectAllCategories();
     effectAllBooks(filter);
+    effectAllBooking();
   }, []);
+
+  async function effectAllBooking() {
+    const response = await getAllBookings();
+    setBookings(response);
+  }
 
   async function effectAllBooks(filter) {
     let baseUrl = '';
@@ -26,7 +35,7 @@ export function Home() {
     Object.entries(filter).forEach((entries) => {
       const [key, value] = entries;
       if (value) baseUrl += `${key}=${value}&`;
-    
+
     });
     const response = await getAllBooks(baseUrl);
     setBooks(response);
@@ -58,7 +67,7 @@ export function Home() {
         </div>
       </section>
       <section className='container'>
-        <Table books={books} />
+        <TableBooks books={books} />
       </section>
     </>
   );

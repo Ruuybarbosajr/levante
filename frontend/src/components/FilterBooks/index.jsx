@@ -20,7 +20,16 @@ export function FilterBook({ books, categories, output }) {
             onChange={ ({ target }) => output((prev) => ({ ...prev, author: target.value }))}
           >
             <option value="" selected>Select an author…</option>
-            {books.map((book) => <option value={book.author} key={book.id}>{book.author}</option>)}
+            {
+              books.sort((a, b) => a.author.localeCompare(b.author)).map(
+                (book) => <option value={book.author} key={book.id}
+                >
+                  {
+                    book.author
+                  }
+                </option>
+              )
+            }
           </select>
         </label>
         <label htmlFor="category">
@@ -30,7 +39,7 @@ export function FilterBook({ books, categories, output }) {
             onChange={ ({ target }) => output((prev) => ({ ...prev, categoryId: target.value }))}
           >
             <option value="oi" selected>Select a category…</option>
-            {categories.map((category) =>(
+            {categories.sort((a, b) => a.type.localeCompare(b.type)).map((category) =>(
               <option value={category.id} key={category.id}>{category.type}</option>
             ))}
           </select>

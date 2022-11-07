@@ -32,7 +32,7 @@ export function Modal({ children, setOpen, functionAction }) {
             onClick={() => setOpen((prev) => !prev)}>
         Cancel
           </a>
-          <a href="#confirm"
+          <a href=""
             aria-busy={loading}
             disabled={error}
             role="button"

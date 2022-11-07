@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import UserContext from './UserContext';
+import UserContext from './User/UserContext';
 import { decodeToken } from 'react-jwt';
 
 export default function UserProvider({ children }) {

@@ -1,6 +1,10 @@
 import React from 'react';
 
 export function Header() {
+  function logout() {
+    localStorage.removeItem('token');
+  }
+
   return (
     <section className='container'>
       <nav>
@@ -8,9 +12,9 @@ export function Header() {
           <li><strong>Library</strong></li>
         </ul>
         <ul>
-          <li><a href="/livros">Livros</a></li>
-          <li><a href="/reservas">Reservas</a></li>
-          <li><a href="/" role="button">Sair</a></li>
+          <li><a href="/home">Books</a></li>
+          <li><a href="/bookings">Bookings</a></li>
+          <li><a href="/" role="button" onClick={() => logout() }>Logout</a></li>
         </ul>
       </nav>
     </section>
