@@ -24,7 +24,6 @@ export async function getUsers() {
         authorization: localStorage.getItem('token'),
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     if (error.response) {

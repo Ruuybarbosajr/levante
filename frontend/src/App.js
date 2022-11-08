@@ -9,6 +9,8 @@ import { Bookings } from './pages/Bookings';
 import CreateUser from './pages/CreateUser';
 import AuthAdmin from './components/AuthAdmin';
 import { SharedProvider } from './contexts/SharedContext/SharedProvided';
+import CreateBook from './pages/CreateBook';
+import HandleBook from './pages/HandleBook';
 
 function App() {
   return (
@@ -42,7 +44,9 @@ function App() {
             element={
               <BookingsProvider>
                 <UserProvider>
-                  <Bookings />
+                  <SharedProvider>
+                    <Bookings />
+                  </SharedProvider>
                 </UserProvider>
               </BookingsProvider>
             }
@@ -54,6 +58,34 @@ function App() {
                 <AuthToken>
                   <UserProvider>
                     <CreateUser />
+                  </UserProvider>
+                </AuthToken>
+              </AuthAdmin>
+            }
+          />
+          <Route
+            path='/create/book'
+            element={
+              <AuthAdmin>
+                <AuthToken>
+                  <UserProvider>
+                    <SharedProvider>
+                      <CreateBook />
+                    </SharedProvider>
+                  </UserProvider>
+                </AuthToken>
+              </AuthAdmin>
+            }
+          />
+          <Route
+            path='/edit/book'
+            element={
+              <AuthAdmin>
+                <AuthToken>
+                  <UserProvider>
+                    <SharedProvider>
+                      <HandleBook />
+                    </SharedProvider>
                   </UserProvider>
                 </AuthToken>
               </AuthAdmin>

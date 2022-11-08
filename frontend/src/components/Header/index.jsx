@@ -17,6 +17,8 @@ export function Header() {
           <li><a href="/home">Books</a></li>
           <li><a href="/bookings">Bookings</a></li>
           { user.permission && <li><a href="/create/user">Create user</a></li> }
+          { user.permission && <li><a href="/create/book">Create book</a></li> }
+          { user.permission && <li><a href="/edit/book">Edit book</a></li> }
           <li><a href="/" role="button" onClick={() => logout() }>Logout</a></li>
         </ul>
       </nav>

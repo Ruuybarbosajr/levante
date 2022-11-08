@@ -1,4 +1,4 @@
 .container__forms {
-  width: 60vw;
+  max-width: 40vw;
   margin-top: 12%;
 }

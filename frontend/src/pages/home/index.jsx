@@ -6,7 +6,6 @@ import BookingsContext from '../../contexts/bookings/BookingsContext';
 import SharedContext from '../../contexts/SharedContext/SharedContext';
 import UserContext from '../../contexts/User/UserContext';
 import { getAllBooks } from '../../services/books.service';
-import { getAllCategories } from '../../services/categories.service';
 import { getUsers } from '../../services/user.service';
 
 
@@ -15,7 +14,6 @@ export function Home() {
   const { setUsers } = useContext(SharedContext);
   const { updateList } = useContext(BookingsContext);
   const [books, setBooks] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState({
     title: '',
     categoryId: '',
@@ -23,10 +21,8 @@ export function Home() {
   });
   
   useEffect(() => {
-    effectAllCategories();
     effectAllBooks(filter);
     effectAllBooking();
-    console.log(user);
     if (user.permission) {
       effectUsers();
     }
@@ -34,7 +30,6 @@ export function Home() {
 
   async function effectUsers() {
     const response = await getUsers();
-    console.log(response);
     setUsers(response);
   }
 
@@ -54,11 +49,6 @@ export function Home() {
     setBooks(response);
   }
 
-  async function effectAllCategories() {
-    const response = await getAllCategories();
-    setCategories(response);
-  }
-
   async function handleFilter(type = 'all') {
     if (type === 'all') {
       await effectAllBooks({
@@ -74,7 +64,7 @@ export function Home() {
       <Header />
       <article>
         <section className='container'>
-          <FilterBook books={books} categories={categories} output={setFilter}/>
+          <FilterBook books={books} output={setFilter}/>
           <div className="grid">
             <button type="button" onClick={ () => handleFilter() } className='outline'>All</button>
             <button type="button" onClick={ () => handleFilter('filter') } className='outline'>Filter</button>

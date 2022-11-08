@@ -23,7 +23,7 @@ function CreateUser() {
         permission: false,
         password: ''
       });
-      enqueueSnackbar(`User ${createdUser.name} created`);
+      enqueueSnackbar(`User "${createdUser.name}" created`);
     } else {
       enqueueSnackbar(createdUser.message);
     }
