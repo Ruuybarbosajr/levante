@@ -15,3 +15,12 @@ Gerenciador de reservas.
 
 - Ele vai subir sua API na porta `3001`
 - Aplicação Frontend na porta `3000`
+
+> Acesso de usuário <br/>
+`email: email@user.com` <br/>
+`password: senhapadrao`
+
+> Acesso de admin <br/>
+`email: email@admin.com` <br/>
+`password: senhapadrao`
+
