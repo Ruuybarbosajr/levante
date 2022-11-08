@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import SharedContext from '../../contexts/SharedContext/SharedContext';
 
-export function FilterBook({ books, categories, output }) {
+export function FilterBook({ books, output }) {
+  const { categories } = useContext(SharedContext);
   return (
     <form onSubmit={(event) => event.preventDefault()}>
       <hgroup>

@@ -41,32 +41,28 @@ function Login() {
           handleSubmit();
         }
       }>
-        <div className="grid">
-          <label htmlFor="firstname">
+        <label htmlFor="firstname">
           Email
-            <input
-              onChange={ ({ target }) => setLogin((prev) => ({ ...prev, email: target.value }))}
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              required />
-          </label>
+          <input
+            onChange={ ({ target }) => setLogin((prev) => ({ ...prev, email: target.value }))}
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required />
+        </label>
   
-          <label htmlFor="lastname">
-          Senha
-            <input
-              onChange={ ({ target }) => setLogin((prev) => ({ ...prev, password: target.value }))}
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Senha"
-              required />
-          </label>
-  
-        </div>
-   
-        <button type="submit">Entrar</button>
+        <label htmlFor="lastname">
+          Password
+          <input
+            onChange={ ({ target }) => setLogin((prev) => ({ ...prev, password: target.value }))}
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Senha"
+            required />
+        </label>
+        <button type="submit">Sign In</button>
       </form>
     </section>
   );

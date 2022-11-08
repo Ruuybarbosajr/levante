@@ -6,6 +6,11 @@ import AuthToken from './components/AuthToken';
 import { BookingsProvider } from './contexts/bookings/BookingsProvider';
 import { UserProvider } from './contexts/User/UserProvider';
 import { Bookings } from './pages/Bookings';
+import CreateUser from './pages/CreateUser';
+import AuthAdmin from './components/AuthAdmin';
+import { SharedProvider } from './contexts/SharedContext/SharedProvided';
+import CreateBook from './pages/CreateBook';
+import HandleBook from './pages/HandleBook';
 
 function App() {
   return (
@@ -26,7 +31,9 @@ function App() {
               <AuthToken>
                 <UserProvider>
                   <BookingsProvider>
-                    <Home />
+                    <SharedProvider>
+                      <Home />
+                    </SharedProvider>
                   </BookingsProvider>
                 </UserProvider>
               </AuthToken>
@@ -36,8 +43,52 @@ function App() {
             path='/bookings'
             element={
               <BookingsProvider>
-                <Bookings />
+                <UserProvider>
+                  <SharedProvider>
+                    <Bookings />
+                  </SharedProvider>
+                </UserProvider>
               </BookingsProvider>
+            }
+          />
+          <Route
+            path='/create/user'
+            element={
+              <AuthAdmin>
+                <AuthToken>
+                  <UserProvider>
+                    <CreateUser />
+                  </UserProvider>
+                </AuthToken>
+              </AuthAdmin>
+            }
+          />
+          <Route
+            path='/create/book'
+            element={
+              <AuthAdmin>
+                <AuthToken>
+                  <UserProvider>
+                    <SharedProvider>
+                      <CreateBook />
+                    </SharedProvider>
+                  </UserProvider>
+                </AuthToken>
+              </AuthAdmin>
+            }
+          />
+          <Route
+            path='/edit/book'
+            element={
+              <AuthAdmin>
+                <AuthToken>
+                  <UserProvider>
+                    <SharedProvider>
+                      <HandleBook />
+                    </SharedProvider>
+                  </UserProvider>
+                </AuthToken>
+              </AuthAdmin>
             }
           />
         </Routes>

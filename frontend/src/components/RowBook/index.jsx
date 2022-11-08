@@ -1,15 +1,26 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import BookingsContext from '../../contexts/bookings/BookingsContext';
+import SharedContext from '../../contexts/SharedContext/SharedContext';
 import UserContext from '../../contexts/User/UserContext';
 import { createBooking } from '../../services/booking.service';
 import { OpenModal } from '../OpenModal';
 
 export function RowBook({ book }) {
   const { user } = useContext(UserContext);
+  const { users } = useContext(SharedContext);
   const { bookings, updateList } = useContext(BookingsContext);
-
+  const [bookingUser, setBookingUser] = useState({
+    name: '',
+    email: ''
+  });
+  
   const isBooking = useMemo(() => {
-    return bookings.some((booking) => book.id === booking.book.id);
+    if (user.permission) return;
+    return bookings.some((booking) => {
+      const findAnyBooking = book.id === booking.book.id;
+      const statusClosed = booking.status === 'Aberta';
+      return findAnyBooking && statusClosed;
+    });
   }, [bookings]);
 
   const  makeDate = useCallback(() => {
@@ -22,7 +33,11 @@ export function RowBook({ book }) {
 
   async function confirmBooking() {
     const data = {
-      user,
+      user: user.permission ? {
+        id: bookingUser.id,
+        name: bookingUser.name,
+        email: bookingUser.email
+      } : user,
       book,
       createdAt: makeDate().bookingDate,
       returnDate: makeDate().returnDate
@@ -33,6 +48,11 @@ export function RowBook({ book }) {
       return response;
     }
     return response;
+  }
+
+  function handleUser(id) {
+    const findUser = users.find((user) => user.id === id); 
+    setBookingUser(findUser);
   }
 
   return (
@@ -48,14 +68,28 @@ export function RowBook({ book }) {
                 <h1 className='title'>Confirm your booking details</h1>
               </header>
               <hr></hr> 
+              <hgroup>
+                <h3>User information</h3>
+              </hgroup>
+              { user.permission && (
+                <label htmlFor="user">
+                    User
+                  <select
+                    onChange={({ target }) => handleUser(target.value)}
+                    id="user"
+                  >
+                    <option value="" selected>Select a user…</option>
+                    { users.map((user) => (<option value={user.id} key={user.id}>{user.name}</option>)) }
+                  </select>
+                </label>
+              )}
               <fieldset disabled>
-                <hgroup>
-                  <h3>User information</h3>
-                </hgroup>
                 <label htmlFor="name">Name</label>
-                <input id="name" type="text" value={ user.name } />
+                { user.permission && <input id="name" type="text" value={ bookingUser.name } />}
+                { !user.permission && <input id="name" type="text" value={ user.name } /> }
                 <label htmlFor="email">Email</label>
-                <input type="text" id="email" value={ user.email } />
+                { user.permission && <input id="name" type="text" value={ bookingUser.email } /> }
+                { !user.permission && <input type="text" id="email" value={ user.email } />}
               </fieldset>
               <hr></hr>
               <fieldset disabled>
