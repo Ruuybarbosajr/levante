@@ -22,7 +22,7 @@ async function main() {
         data: { ...booking },
       });
     }
-  }, 1000);
+  }, 2000);
 }
 
 main()

@@ -10,11 +10,13 @@ async function main() {
     },
   ];
 
-  for (const book of books) {
-    await prisma.book.create({
-      data: { ...book },
-    });
-  }
+  setTimeout(async () => {
+    for (const book of books) {
+      await prisma.book.create({
+        data: { ...book },
+      });
+    }
+  }, 1000);
 }
 
 main()
