@@ -16,6 +16,7 @@ services:
     tty: true
     stdin_open: true
     restart: always
+    command: bash -c "chown -R root /app-backend && npm install && npm run db:up && npm run dev"
     volumes:
       - ./backend:/app-backend
     environment:

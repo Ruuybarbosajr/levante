@@ -1,11 +1,7 @@
 FROM node:16.17.0
 
-WORKDIR /app-backend/
+WORKDIR /app-backend
 
-COPY . /app-backend/
+COPY . .
 
 RUN npm install
-
-COPY . /app-backend/
-
-CMD [ "npm", "start" ]
